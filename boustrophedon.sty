@@ -12,15 +12,15 @@
 \newbox\linebox
 \newcount\mycount
 
-	\def\splitlines{%
-		\setbox\linebox\lastbox
-		\ifvoid\linebox
-		\noindent\ignorespaces
-		\else
-		\unskip\unpenalty
-		\begingroup\splitlines\space\endgroup
-		\processline
-	\fi}
+\def\splitlines{%
+	\setbox\linebox\lastbox
+	\ifvoid\linebox
+	\noindent\ignorespaces
+	\else
+	\unskip\unpenalty
+	\begingroup\splitlines\space\endgroup
+	\processline
+\fi}
 
 \NewEnviron{boustrophedon}{%
 	\def\processline{
