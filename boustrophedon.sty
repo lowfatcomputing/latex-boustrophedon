@@ -1,0 +1,47 @@
+% Boustrophedon package for LaTeX.
+% Andreas Wagner
+\NeedsTeXFormat{LaTeX2e}
+\usepackage{xparse}
+\usepackage{environ}
+\usepackage{rotating}
+\usepackage{ifthen}
+\usepackage{everyhook}
+\usepackage{graphicx}
+\usepackage{calc}
+\ProvidesPackage{boustrophedon}[2011/09/25 Boustrophedon and Rongorongo formatting package.]
+\newbox\linebox
+\newcount\mycount
+
+	\def\splitlines{%
+		\setbox\linebox\lastbox
+		\ifvoid\linebox
+		\noindent\ignorespaces
+		\else
+		\unskip\unpenalty
+		\begingroup\splitlines\space\endgroup
+		\processline
+	\fi}
+
+\NewEnviron{boustrophedon}{%
+	\def\processline{
+		\global\advance\mycount by 1
+		\ifodd\mycount
+		\unhbox\linebox
+		\else
+		\makebox[\textwidth][c]{\smash{\reflectbox{\unhbox\linebox}}}%
+	\fi}
+	\vbox{\BODY\par\splitlines}
+}
+
+\NewEnviron{rongorongo}{%
+	\def\processline{
+		\global\advance\mycount by 1
+		\ifodd\mycount
+		\box\linebox
+		\else
+		\makebox[\textwidth][c]{\smash{\rotatebox[origin=c]{180}{\box\linebox}}}%
+	\fi}
+
+	\vbox{\BODY\par\splitlines}
+}
+
