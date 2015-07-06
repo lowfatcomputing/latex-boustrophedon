@@ -26,9 +26,9 @@
 	\def\processline{
 		\global\advance\mycount by 1
 		\ifodd\mycount
-		\unhbox\linebox
+		\box\linebox
 		\else
-		\makebox[\textwidth][c]{\smash{\reflectbox{\unhbox\linebox}}}%
+		\makebox[\textwidth][c]{\smash{\reflectbox{\box\linebox}}}%
 	\fi}
 	\vbox{\BODY\par\splitlines}
 }
